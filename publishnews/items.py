@@ -14,5 +14,3 @@ class Livro(scrapy.Item):
     numero_paginas = scrapy.Field()
     volume_compra = scrapy.Field()
     tradutores = scrapy.Field()
-
-    junk = scrapy.Field()

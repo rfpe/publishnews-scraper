@@ -60,9 +60,6 @@ class PnSemanalSpider(scrapy.Spider):
                         l['preco'] = item_value.replace('R$ ', '').replace(',', '.')
                     elif item_label == "páginas":
                         l['numero_paginas'] = item_value
-                    else:
-                        # Não é possível fazer parsing
-                        l['junk'] = item_extra.xpath('./strong/text()').extract_first()
 
             l['data_referencia'] = response.meta['data_referencia']
 
