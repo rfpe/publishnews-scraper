@@ -57,7 +57,7 @@ class PnSemanalSpider(scrapy.Spider):
                     elif item_label == "categoria":
                         l['categoria'] = item_value
                     elif item_label == "preço":
-                        l['preco'] = item_value
+                        l['preco'] = item_value.replace('R$ ', '').replace(',', '.')
                     elif item_label == "páginas":
                         l['numero_paginas'] = item_value
                     else:
