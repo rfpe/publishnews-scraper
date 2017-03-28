@@ -13,9 +13,8 @@ class PnSemanalSpider(scrapy.Spider):
         week_links = response.xpath('//*[@id="pn-selecao-semanal"]/div/a/@href').extract()
 
         for link in week_links:
-
             # Formato do link: "/ranking/semanal/0/2017/3/24/0/0"
-            data_referencia = link.split("/")[4]+"-"+link.split("/")[5]+"-"+link.split("/")[6]
+            data_referencia = link.split("/")[4] + "-" + link.split("/")[5] + "-" + link.split("/")[6]
 
             yield scrapy.Request(callback=self.parse_book_ranking,
                                  url="http://www.publishnews.com.br" + link,
@@ -39,7 +38,6 @@ class PnSemanalSpider(scrapy.Spider):
             l['autor'] = cabecalho_livro.xpath('./div[3]/text()').extract_first()
             l['editora'] = cabecalho_livro.xpath('./div[4]/text()').extract_first()
 
-
             # Atributos presentes na div oculta
             dados_extras = livro_div.xpath('./div[3]/div[1]/div[2]/div')
 
@@ -55,7 +53,7 @@ class PnSemanalSpider(scrapy.Spider):
                     if item_label == "tradução":
                         l['tradutores'] = item_value
                     elif item_label == "isbn":
-                        l['isbn'] = item_value
+                        l['isbn'] = item_value.replace('-', '')
                     elif item_label == "categoria":
                         l['categoria'] = item_value
                     elif item_label == "preço":
@@ -65,7 +63,6 @@ class PnSemanalSpider(scrapy.Spider):
                     else:
                         # Não é possível fazer parsing
                         l['junk'] = item_extra.xpath('./strong/text()').extract_first()
-
 
             l['data_referencia'] = response.meta['data_referencia']
 
