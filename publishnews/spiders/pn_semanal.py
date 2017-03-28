@@ -30,7 +30,7 @@ class PnSemanalSpider(scrapy.Spider):
 
             # Atributos do ranking
             l['posicao_ranking'] = livro_div.xpath('./div[1]/text()').extract_first()
-            l['volume_compra'] = livro_div.xpath('./div[2]/text()').extract_first()
+            l['volume_compra'] = livro_div.xpath('./div[2]/text()').extract_first().replace('.', '')
 
             # Atributos presentes no cabecalho
             cabecalho_livro = livro_div.xpath('./div[3]/div[1]/div[1]')
