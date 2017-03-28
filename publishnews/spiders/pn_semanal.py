@@ -53,7 +53,8 @@ class PnSemanalSpider(scrapy.Spider):
                     if item_label == "tradução":
                         l['tradutores'] = item_value
                     elif item_label == "isbn":
-                        l['isbn'] = item_value.replace('-', '')
+                        if item_value is not None:
+                            l['isbn'] = item_value.replace('-', '')
                     elif item_label == "categoria":
                         l['categoria'] = item_value
                     elif item_label == "preço":
